@@ -1,6 +1,5 @@
 package ultimate.kotlin.workshop
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -11,9 +10,7 @@ data class Pong(
 
 @RestController
 @RequestMapping("/ping")
-class PingController(
-        private val mapper: ObjectMapper
-) {
+class PingController {
 
     private val pingResponse = "pong"
 

@@ -9,7 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.RequestEntity
 import org.springframework.test.context.junit4.SpringRunner
 import java.net.URI
@@ -25,7 +24,7 @@ class AccountTest {
     fun `When GET accounts Then return empty list`() {
         val request = RequestEntity.get(URI.create("/accounts")).build()
 
-        val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
+        val response = rest.exchange<List<Account>>(request)
 
         assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).isEqualTo(emptyList<Account>())
@@ -38,7 +37,7 @@ class AccountTest {
 
         val request = RequestEntity.get(URI.create("/accounts")).build()
 
-        val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
+        val response = rest.exchange<List<Account>>(request)
 
         assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).containsExactly(account)
@@ -49,6 +48,3 @@ class AccountTest {
     }
 
 }
-
-// inline fun <I, reified O> TestRestTemplate.exchange(request: RequestEntity<I>) =
-//         exchange(request, object : ParameterizedTypeReference<O>() {})

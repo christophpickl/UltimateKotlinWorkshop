@@ -83,6 +83,20 @@ fun `Given single account existing When GET accounts Then return that account`()
 
 * We will keep this test not compiling for the time being as we proceed on introducing a separate service layer.
 
+* PS: There is a nasty code in the test above using a `ParameterizedTypeReference` type. This is due to the JVM's nature on handling generics (type erasure), and we need to workaround here.
+    * As Kotlin supports extension functions, and reified generics for inlined methods (sounds nasty too, I know), we can optimize the code as follows:
+    
+```kotlin
+inline fun <reified O> TestRestTemplate.exchange(request: RequestEntity<*>) =
+        exchange(request, object : ParameterizedTypeReference<O>() {})!!
+
+// OLD
+val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
+
+// NEW
+val response = rest.exchange<List<Account>>(request)
+```
+
 ### 2.1.5 - Service layer
 
 * In the `Account` file add the following service definition:
@@ -124,14 +138,11 @@ class AccountTest {
 ```groovy
 compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2')
 ```
-    
-    
-## 2.2 - Create operation
 
-## 2.3 - Update operation
+## 2.2 - Other CRUD operation
 
-## 2.4 - Delete operation
-
+* We will not cover those because of time reasons but still can head on to the next stage where we are going to persist our data in a database.
+* BTW: Now it's a good time to run all tests together and verify everything still works.
 
 ----
 Navigation: [Home](../README.md) - [Next Stage 3](Stage_3.md)

@@ -10,9 +10,6 @@ data class Account(
         val alias: String,
         val balance: Int
 )
-//{
-//    constructor() : this(1, "alias", 42)
-//}
 
 @RestController
 @RequestMapping("/accounts")
@@ -26,11 +23,16 @@ class AccountController(
 }
 
 interface AccountService {
+
     fun readAccounts(): List<Account>
+
 }
 
 @Service
 class AccountServiceImpl : AccountService {
+
     private val accounts = mutableListOf<Account>()
+
     override fun readAccounts() = accounts
+
 }
