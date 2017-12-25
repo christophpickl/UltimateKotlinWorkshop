@@ -25,7 +25,7 @@ You will need the following tools prepared on your machine to be able to follow 
 
 # Step-by-step Howto
 
-## Stage 1
+## Stage 1 - Hello World
 
 * download project skeleton
 	- go to http://start.spring.io/
@@ -42,7 +42,8 @@ You will need the following tools prepared on your machine to be able to follow 
 	- open `workshop/build.gradle`
 		* change `kotlinVersion` from `1.1.61` to `1.2.10`
 		* remove line `apply plugin: 'eclipse'`
-
+* import project
+	- TODO TODO TODO TODO TODO
 
 ## Stage 2
 
