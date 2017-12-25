@@ -35,4 +35,5 @@ In this case please feel free to go through them on your own.
 
 # Appendix
 
+* Not covered topics: containers, logging, proper security, ...
 * Kotlin and Gradle help: https://kotlinlang.org/docs/reference/using-gradle.html

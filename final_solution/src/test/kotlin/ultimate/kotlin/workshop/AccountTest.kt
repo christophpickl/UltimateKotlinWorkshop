@@ -1,24 +1,25 @@
 package ultimate.kotlin.workshop
 
-import com.nhaarman.mockito_kotlin.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.RequestEntity
+import org.springframework.test.annotation.DirtiesContext
+import org.springframework.test.annotation.DirtiesContext.ClassMode
 import org.springframework.test.context.junit4.SpringRunner
 import java.net.URI
 
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 class AccountTest {
 
     @Autowired private lateinit var rest: TestRestTemplate
-    @MockBean private lateinit var mockService: AccountService
+    @Autowired private lateinit var repo: AccountRepository
 
     @Test
     fun `When GET accounts Then return empty list`() {
@@ -32,9 +33,7 @@ class AccountTest {
 
     @Test
     fun `Given single account existing When GET accounts Then return that account`() {
-        val account = Account(1, "alias", 42)
-        givenAccountsExist(listOf(account))
-
+        val account = givenAccount(Account(0, "alias", 42))
         val request = RequestEntity.get(URI.create("/accounts")).build()
 
         val response = rest.exchange<List<Account>>(request)
@@ -43,8 +42,6 @@ class AccountTest {
         assertThat(response.body).containsExactly(account)
     }
 
-    private fun givenAccountsExist(accounts: List<Account>) {
-        whenever(mockService.readAccounts()).thenReturn(accounts)
-    }
+    private fun givenAccount(account: Account) = repo.save(account.toAccountJpa()).toAccount()
 
 }

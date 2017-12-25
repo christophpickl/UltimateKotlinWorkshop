@@ -64,13 +64,12 @@ class AccountController {
 
 ### 2.1.4 - Test first again
 
-* Add a new test method in `AccountTest` which needs to arrange test data first via a non-yet-known `givenAccountsExist` method:
+* Add a new test method in `AccountTest` which needs to arrange test data first via a non-yet-known `givenAccount` method:
 
 ```kotlin
 @Test
 fun `Given single account existing When GET accounts Then return that account`() {
-    val account = Account(1, "alias", 42)
-    givenAccountsExist(listOf(account))
+    val account = givenAccount(Account(0, "alias", 42))
 
     val request = RequestEntity.get(URI.create("/accounts")).build()
 
@@ -125,8 +124,8 @@ class AccountTest {
     // ...
     @MockBean private lateinit var mockService: AccountService
     // ...
-    private fun givenAccountsExist(accounts: List<Account>) {
-        whenever(mockService.readAccounts()).thenReturn(accounts)
+    private fun givenAccount(account: Account) = account.apply {
+        whenever(mockService.readAccounts()).thenReturn(listOf(account))
     }
 }
 ```

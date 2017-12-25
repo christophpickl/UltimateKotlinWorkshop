@@ -29,10 +29,10 @@ interface AccountService {
 }
 
 @Service
-class AccountServiceImpl : AccountService {
+class AccountServiceImpl(
+        private val repo: AccountRepository
+) : AccountService {
 
-    private val accounts = mutableListOf<Account>()
-
-    override fun readAccounts() = accounts
+    override fun readAccounts() = repo.findAll().map { it.toAccount() }
 
 }
