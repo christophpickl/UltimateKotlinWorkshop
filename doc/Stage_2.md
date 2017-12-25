@@ -1,8 +1,12 @@
 # Stage 2 - CRUD operations
 
-* CRUD stands for **C**reate **R**ead **U**pdate **D**elete and defines the basic (manipulation) operation on entities.
+* CRUD stands for **C**reate **R**ead **U**pdate **D**elete and defines a set of basic operations. It is a very common approach on how to manage your entities.
+
 
 ## 2.1 - Read operation
+
+* This is the only operation we will cover here as of short time. Still the final solution contains the whole CRUD operations.
+
 
 ### 2.1.1 - Create the domain object
 
@@ -16,6 +20,7 @@ data class Account(
         val balance: Int
 )
 ```
+
 
 ### 2.1.2 - Test first
 
@@ -44,7 +49,8 @@ class AccountTest {
 
 * Running the test should fail for now.
 
-### 2.1.3 - Add a new controller for accounts
+
+### 2.1.3 - Add a new controller
 
 * Copy the `PingController` text and paste it into the `Account.kt` file.
 * Adapt the class name, request mapping path and replace the method accordingly to:
@@ -62,7 +68,8 @@ class AccountController {
 
 * If you run the test now, it should be green, for this specific case but what about actual returned accounts?!
 
-### 2.1.4 - Test first again
+
+### 2.1.4 - Tests again
 
 * Add a new test method in `AccountTest` which needs to arrange test data first via a non-yet-known `givenAccount` method:
 
@@ -82,21 +89,8 @@ fun `Given single account existing When GET accounts Then return that account`()
 
 * We will keep this test not compiling for the time being as we proceed on introducing a separate service layer.
 
-* PS: There is a nasty code in the test above using a `ParameterizedTypeReference` type. This is due to the JVM's nature on handling generics (type erasure), and we need to workaround here.
-    * As Kotlin supports extension functions, and reified generics for inlined methods (sounds nasty too, I know), we can optimize the code as follows:
-    
-```kotlin
-inline fun <reified O> TestRestTemplate.exchange(request: RequestEntity<*>) =
-        exchange(request, object : ParameterizedTypeReference<O>() {})!!
 
-// OLD
-val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
-
-// NEW
-val response = rest.exchange<List<Account>>(request)
-```
-
-### 2.1.5 - Service layer
+### 2.1.5 - Implement a dummy service layer
 
 * In the `Account` file add the following service definition:
 
@@ -114,16 +108,16 @@ class AccountServiceImpl : AccountService {
 
 * Wire up the interface into the controller, delegating the read operation to the new service.
 
+
 ### 2.1.6 - Finish the test
 
 * In the `AccountTest` it is now possible to mock the service layer:
 
 ```kotlin
-// ...
 class AccountTest {
-    // ...
+    
     @MockBean private lateinit var mockService: AccountService
-    // ...
+    
     private fun givenAccount(account: Account) = account.apply {
         whenever(mockService.readAccounts()).thenReturn(listOf(account))
     }
@@ -136,6 +130,20 @@ class AccountTest {
 
 ```groovy
 compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2')
+```
+
+* PS: There is a nasty code in the test above using a `ParameterizedTypeReference` type. This is due to the JVM's nature on handling generics (type erasure), and we need to workaround here.
+    * As Kotlin supports extension functions, and reified generics for inlined methods (sounds nasty too, I know), we can optimize the code as follows:
+    
+```kotlin
+inline fun <reified O> TestRestTemplate.exchange(request: RequestEntity<*>) =
+        exchange(request, object : ParameterizedTypeReference<O>() {})!!
+
+// OLD
+val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
+
+// NEW
+val response = rest.exchange<List<Account>>(request)
 ```
 
 ## 2.2 - Other CRUD operation

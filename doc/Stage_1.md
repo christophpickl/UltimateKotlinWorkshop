@@ -9,7 +9,7 @@
 	- Keep Spring Boot version `1.5.9` (latest stable release)
 	- Enter as Group: `ultimate.kotlin`
 	- Enter as Artifact: `workshop`
-	- // no dependencies needed, we will add them manually
+	- No dependencies needed, we will add them manually later on
 	- Hit `Generate Project` button & download & unzip
 * Prepare the project:
 	- Open `workshop/gradle/wrapper/gradle-wrapper.properties`
@@ -28,22 +28,23 @@
 * Test application runs:
     - Locate the `WorkshopApplication` class and run it (it should quit immediately)
 
-## 1.2 - A Ping pong game
+## 1.2 - Ping pong game
+
+* We will now implement a simple `GET /ping` endpoint which returns the static text `pong`.
 
 ### 1.2.1 - Test first
 
 * Add the following dependencies in your `build.gradle` file:
 
 ```groovy
-compile('org.springframework.boot:spring-boot-starter-web')
-testCompile('org.assertj:assertj-core:3.8.0')
-testCompile('com.nhaarman:mockito-kotlin:1.5.0')
+compile "org.springframework.boot:spring-boot-starter-web"
+testCompile "org.assertj:assertj-core:3.8.0"
+testCompile "com.nhaarman:mockito-kotlin:1.5.0"
 ```
 
 * You might need to re-import your gradle project (enable auto-import if asked so).
 
-* Create a new Kotlin class `PingTest` next to `WorkshopApplicationTests` in `src/test/kotlin`.
-* Add the following content to that file:
+* Create a new Kotlin class `PingTest` next to `WorkshopApplicationTests` in `src/test/kotlin`:
 
 ```kotlin
 @RunWith(SpringRunner::class)
@@ -65,12 +66,12 @@ class PingTest {
 }
 ```
 
-* Run the test, it should fail saying that the connection was refused -that's ok ;)
+* Run the test, it should fail saying that the connection was refused -that's ok because we haven't yet implemented the controller ;)
 
 
 ### 1.2.2 - Implement the controller
 
-* Inside of the `WorkshopApplication.kt` file, create a new Kotlin class:
+* For sake of simplicity create a new Kotlin class `PingController` inside the `WorkshopApplication.kt` file:
 
 ```kotlin
 @RestController
@@ -85,14 +86,13 @@ class PingController {
 * You can also invoke the service directly from your browser (or use Postman): http://localhost:8080/ping
 
 
-### 1.2.3 - Content negotation
+## 1.3 - Content negotation
 
 * We will now add the capability of providing an accept header, which will determine the content/MIME type of the response:
+    - `text/plain`
+    - `application/json`
 
-    1. `text/plain`
-    1. `application/json`
-
-#### 1.2.3.1 - Test first
+### 1.3.1 - Test first
 
 * Adapt the `PingTest` by adding one more test like this:
 
@@ -112,7 +112,7 @@ fun `When GET ping accepting JSON Then JSON payload is returned`() {
 
 * When running this new test it should fail, whereas the existing one should still be green.
 
-#### 1.2.3.2 - Reponse with a data class
+### 1.3.2 - Update the controller
 
 * Now define a new data class `Pong` storing the message and enhance the `PingController` specifying explicit produce types:
 
@@ -142,6 +142,7 @@ class PingController(
 * Now run all test cases for ping which should now have turned both green.
 
 Well done, you finished the very basics of a ReSTful webservice using Kotlin and Spring Boot. Wasn't that hard, was it?! ;)
+
 Now let's head on and implement some very common functionality in the world of services: CRUD
 
 ----

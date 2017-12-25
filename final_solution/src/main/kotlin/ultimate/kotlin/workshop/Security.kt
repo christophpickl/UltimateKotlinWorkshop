@@ -68,7 +68,7 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
 
 @Configuration
 @EnableWebMvc
-class MyWebMvcConfig : WebMvcConfigurerAdapter() {
+class UltimateWebMvcConfig : WebMvcConfigurerAdapter() {
 
     @Autowired private lateinit var userService: UserService
 

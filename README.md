@@ -29,11 +29,11 @@ In this case please feel free to go through them on your own.
 
 
 * [Stage 1](doc/Stage_1.md): Hello World
-* Stage 2: CRUD operations
-* Stage 3: Persistence
-* Stage 4: Security
+* [Stage 2](doc/Stage_2.md): CRUD operations
+* [Stage 3](doc/Stage_3.md): Persistence
+* [Stage 4](doc/Stage_4.md): Security
 
 # Appendix
 
-* Not covered topics: containers, logging, proper security, ...
-* Kotlin and Gradle help: https://kotlinlang.org/docs/reference/using-gradle.html
+* Not covered topics: CI, releasing, versioning, documentation, containers, logging, proper security, ...
+* Using Gradle with Kotlin: https://kotlinlang.org/docs/reference/using-gradle.html

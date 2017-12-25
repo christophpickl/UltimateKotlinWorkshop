@@ -44,7 +44,6 @@ dependencies {
 
     // database
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    //compile "org.hibernate:hibernate-java8:5.0.12.Final"
     runtime "com.h2database:h2:1.4.196"
 
     // test

@@ -1,5 +1,6 @@
 # Stage 4 - Security
 
+* ATTENTION: This is NOT how proper authentication is done! Please do not use this as a template for your next project!!!
 * At the moment everything is open to everyone, so we want a simple solution to secure an endpoint.
 * We do this by injecting a custom `User` type into any secured controller method, like this:
 
@@ -11,17 +12,25 @@
 * All the magic is done behind the scenes...
 
 
-## 4.1 - Data class and service
+## 4.1 - User concept
 
-* We will define a simple `User` object and implement a static service to manage them:
+### 4.1.1 - Define the data class
+
+* We will define a very simple `User` object just identified by its name:
+
+```kotlin
+data class User(
+        val name: String
+)
+```
+
+### 4.1.2 - Define the service layer
+
+* Now implement a static service (no database connection) to do a lookup:
 
 ```kotlin
 const val USERNAME_ADMIN = "admin"
 const val USERNAME_CUSTOMER = "customer"
-
-data class User(
-        val name: String
-)
 
 interface UserService {
     fun findUser(name: String): User?
@@ -39,8 +48,9 @@ class UserServiceImpl : UserService {
 }
 ```
 
+## 4.2 - Custom user resolver
 
-## 4.2 - Integrate parameter resolver
+### 4.2.1 - Implement the resolver
 
 * By implementing the `HandlerMethodArgumentResolver` we can add some more logic to Spring so it can detect and resolve our `User` class:
 
@@ -62,6 +72,9 @@ class UserResolver(
 class UnauthorizedException : Exception()
 ```
 
+
+### 4.2.2 - Handle custom exceptions
+
 * So default behaviour is just to throw some new kind of exception, which will by default in a 500 error code.
 * In order to customize Spring's behaviour when custom exceptions are thrown, you need to register a response handler:
 
@@ -75,14 +88,14 @@ class RestResponseEntityExceptionHandler : ResponseEntityExceptionHandler() {
 ```
 
 
-## 4.3 - Register custom resolver
+### 4.2.3 - Register resolver to Spring
 
-* As a final step you need to inject Spring your custom resolver and wire-up the beans:
+* As a final step you need to register your custom resolver and wire-up the beans:
 
 ```kotlin
 @Configuration
 @EnableWebMvc
-class MyWebMvcConfig : WebMvcConfigurerAdapter() {
+class UltimateWebMvcConfig : WebMvcConfigurerAdapter() {
 
     @Autowired private lateinit var userService: UserService
 
@@ -93,7 +106,7 @@ class MyWebMvcConfig : WebMvcConfigurerAdapter() {
 ```
 
 
-## 4.4 - The tests
+## 4.3 - Don't forget about the tests
 
 * Add two new tests which either test for unknown or invalid username, both expecting a 401 status code:
 
@@ -119,7 +132,7 @@ fun `When GET accounts with wrong username Then return 401 Unauthorized`() {
 }
 ```
 
-* Finally adapt the existing tests so they support this new security concept:
+* Finally adapt the existing two tests so they support this new security concept:
 
 ```kotlin
     val request = RequestEntity.get(URI.create("/accounts"))
@@ -127,17 +140,19 @@ fun `When GET accounts with wrong username Then return 401 Unauthorized`() {
                     .build()
 ```
 
-## The end
+* Run all tests again and light up those green signs!
+
+# The end
 
 Nice one, congratulations! You mastered the whole Ultimate Kotlin Workshop :)
-Have fun with everything you've learned, and
+Have fun with everything you've learned, and ...
 
 happy koding
 
 # Extra Stage 5 - Transfer money
 
 * Add possibility to transfer money from one account to another
-* Be aware of authorization and validation and other security concerns...
+* Be aware of authorization and validation and as well as other security concerns...
 
 ----
 Navigation: [Home](../README.md)
