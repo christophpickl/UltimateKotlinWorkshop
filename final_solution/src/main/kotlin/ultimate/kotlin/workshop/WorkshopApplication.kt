@@ -12,10 +12,3 @@ class WorkshopApplication
 fun main(args: Array<String>) {
     SpringApplication.run(WorkshopApplication::class.java, *args)
 }
-
-@RestController
-@RequestMapping("/ping")
-class PingController {
-    @GetMapping
-    fun ping() = "pong"
-}

@@ -18,13 +18,25 @@ class PingTest {
     @Autowired private lateinit var rest: TestRestTemplate
 
     @Test
-    fun `GET ping should response pong`() {
+    fun `When GET ping Then pong text returned`() {
         val request = RequestEntity.get(URI.create("/ping")).build()
 
         val response = rest.exchange(request, String::class.java)
 
         assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).isEqualTo("pong")
+    }
+
+    @Test
+    fun `When GET ping accepting JSON Then JSON payload is returned`() {
+        val request = RequestEntity.get(URI.create("/ping"))
+                .header("accept", "application/json")
+                .build()
+
+        val response = rest.exchange(request, String::class.java)
+
+        assertThat(response.statusCodeValue).isEqualTo(200)
+        assertThat(response.body).isEqualTo("""{"message":"pong"}""")
     }
 
 }
