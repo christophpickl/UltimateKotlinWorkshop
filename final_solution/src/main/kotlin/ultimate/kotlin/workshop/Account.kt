@@ -18,7 +18,7 @@ class AccountController(
 ) {
 
     @GetMapping
-    fun getAccounts() = service.readAccounts()
+    fun getAccounts(user: User) = service.readAccounts()
 
 }
 

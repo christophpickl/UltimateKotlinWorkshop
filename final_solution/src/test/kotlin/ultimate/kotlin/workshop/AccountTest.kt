@@ -13,6 +13,7 @@ import org.springframework.test.annotation.DirtiesContext.ClassMode
 import org.springframework.test.context.junit4.SpringRunner
 import java.net.URI
 
+
 @RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -22,8 +23,30 @@ class AccountTest {
     @Autowired private lateinit var repo: AccountRepository
 
     @Test
-    fun `When GET accounts Then return empty list`() {
+    fun `When GET accounts without username Then return 401 Unauthorized`() {
         val request = RequestEntity.get(URI.create("/accounts")).build()
+
+        val response = rest.exchange<String>(request)
+
+        assertThat(response.statusCodeValue).isEqualTo(401)
+    }
+
+    @Test
+    fun `When GET accounts with wrong username Then return 401 Unauthorized`() {
+        val request = RequestEntity.get(URI.create("/accounts"))
+                .header(HEADER_USERNAME, "wrongUsername")
+                .build()
+
+        val response = rest.exchange<String>(request)
+
+        assertThat(response.statusCodeValue).isEqualTo(401)
+    }
+
+    @Test
+    fun `When GET accounts Then return empty list`() {
+        val request = RequestEntity.get(URI.create("/accounts"))
+                .header(HEADER_USERNAME, USERNAME_CUSTOMER)
+                .build()
 
         val response = rest.exchange<List<Account>>(request)
 
@@ -34,7 +57,9 @@ class AccountTest {
     @Test
     fun `Given single account existing When GET accounts Then return that account`() {
         val account = givenAccount(Account(0, "alias", 42))
-        val request = RequestEntity.get(URI.create("/accounts")).build()
+        val request = RequestEntity.get(URI.create("/accounts"))
+                .header(HEADER_USERNAME, USERNAME_CUSTOMER)
+                .build()
 
         val response = rest.exchange<List<Account>>(request)
 
