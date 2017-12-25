@@ -33,8 +33,6 @@ In this case please feel free to go through them on your own.
 * Stage 3: Persistence
 * Stage 4: Security
 
-# Further Comments
-
-## Links
+# Appendix
 
 * Kotlin and Gradle help: https://kotlinlang.org/docs/reference/using-gradle.html

@@ -10,6 +10,9 @@ data class Account(
         val alias: String,
         val balance: Int
 )
+//{
+//    constructor() : this(1, "alias", 42)
+//}
 
 @RestController
 @RequestMapping("/accounts")

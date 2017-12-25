@@ -1,5 +1,6 @@
 package ultimate.kotlin.workshop
 
+import com.nhaarman.mockito_kotlin.whenever
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +19,7 @@ import java.net.URI
 class AccountTest {
 
     @Autowired private lateinit var rest: TestRestTemplate
-    @MockBean private lateinit var service: AccountService
+    @MockBean private lateinit var mockService: AccountService
 
     @Test
     fun `When GET accounts Then return empty list`() {
@@ -44,7 +45,7 @@ class AccountTest {
     }
 
     private fun givenAccountsExist(accounts: List<Account>) {
-        // service
+        whenever(mockService.readAccounts()).thenReturn(accounts)
     }
 
 }
