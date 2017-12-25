@@ -26,7 +26,7 @@ Optional:
 
 ## Stage 1 - Hello World
 
-### Step 1.1 - Project setup 
+### 1.1 - Project setup 
 
 * Download a prepared project skeleton:
 	- Go to http://start.spring.io/
@@ -54,9 +54,9 @@ Optional:
 * Test application runs:
     - Locate the `WorkshopApplication` class and run it (it should quit immediately)
 
-### Step 1.2 - Implement ping feature
+### 1.2 - Implement ping feature
 
-### Step 1.2.1 - Test first
+### 1.2.1 - Test first
 
 * Add the following dependencies in your `build.gradle` file:
 
@@ -75,23 +75,17 @@ testCompile('org.assertj:assertj-core:3.8.0')
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class PingTest {
 
-    @Autowired private lateinit var rest: TestRestTemplate
-
-    @Test
-    fun `ping pong`() {
-        val request = RequestEntity<String>(GET, URI.create("/ping"))
-
-        val response = rest.exchange(request, String::class.java)
-
-        assertThat(response.statusCodeValue).isEqualTo(200)
-        assertThat(response.body).isEqualTo("pong")
-    }
+TODO
+TODO
+TODO
+TODO
+TODO
 }
 ```
 
 * Run the test, it should fail saying that the connection was refused -that's ok ;)
 
-### Step 1.2.2 - Implement the controller
+### 1.2.2 - Implement the controller
 
 * Inside of the `WorkshopApplication.kt` file, create a new Kotlin class:
 
@@ -108,6 +102,57 @@ class PingController {
 * You can also invoke the service directly from your browser (or use Postman): http://localhost:8080/ping
 
 ## Stage 2 - CRUD operations
+
+### 2.1 - Read operation
+
+#### 2.1.1 - Create the domain object
+
+* We will need some kind of entity description which with we will be dealing with
+* Do so by creating a new file `Account.kt` next to `WorkshopApplication.kt` and add the following so-called _data class_:
+
+```kotlin
+data class Account(
+        val id: Long,
+        val alias: String,
+        val balance: Int
+)
+```
+
+#### 2.1.2 - Test first
+
+* Copy `PingTest` and rename it to `AccountTest`
+* Replace the existing method with the following (rename the class name, but leave everything else):
+
+```kotlin
+AccountTest
+
+TODO
+TODO
+TODO
+TODO
+TODO
+}
+```
+
+* Running the test should fail for now
+
+#### 2.1.3 - Add a new controller for accounts
+
+* Copy the `PingController` text and paste it into the `Account.kt` file
+* Adapt the class name, request mapping path and replace the method accordingly to:
+
+```kotlin
+@RestController
+@RequestMapping("/accounts")
+class AccountController {
+
+    @GetMapping
+    fun getAccounts() = emptyList<Account>()
+
+}
+```
+
+* If you run the test now, it should be green, for this specific case but what about actual returned accounts?!
 
 ## Stage 3 - Persistence
 
