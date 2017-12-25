@@ -1,13 +1,13 @@
-# REMARKS for me
-- jeder braucht:
-	* internet access!
-	* java 8 sdk
-	* intellij (free community edition is enough)
-	??? gradle preinstalled ???
+# About
 
+The __Ultimate Kotlin Workshop__ guides you implementing a basic ReST webservice using the [Kotlin](https://kotlinlang.org/) and [Spring](https://spring.io/) framework.
 
-# TODO
-- organize slack room (in kotlin.lang)
+## Prerequisites
+
+You will need the following tools prepared on your machine to be able to follow the workshop:
+
+1. [Java 8 SDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (9 will also do just fine)
+1. [IntelliJ](https://www.jetbrains.com/idea/download/) (Community edition)
 
 # Outline
 
@@ -23,7 +23,7 @@
 * stage 3: persistence
 	- 
 
-# Step-by-step
+# Step-by-step Howto
 
 ## Stage 1
 
