@@ -28,7 +28,7 @@
 * Test application runs:
     - Locate the `WorkshopApplication` class and run it (it should quit immediately)
 
-## 1.2 - Ping pong game
+## 1.2 - Ping pong
 
 * We will now implement a simple `GET /ping` endpoint which returns the static text `pong`.
 
@@ -102,7 +102,6 @@ fun `When GET ping accepting JSON Then JSON payload is returned`() {
     val request = RequestEntity.get(URI.create("/ping"))
             .header("accept", "application/json") // this line is important
             .build()
-
     val response = rest.exchange(request, String::class.java)
 
     assertThat(response.statusCodeValue).isEqualTo(200)

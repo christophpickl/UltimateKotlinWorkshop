@@ -147,12 +147,7 @@ fun `When GET accounts with wrong username Then return 401 Unauthorized`() {
 Nice one, congratulations! You mastered the whole Ultimate Kotlin Workshop :)
 Have fun with everything you've learned, and ...
 
-happy koding
-
-# Extra Stage 5 - Transfer money
-
-* Add possibility to transfer money from one account to another
-* Be aware of authorization and validation and as well as other security concerns...
+Happy Koding
 
 ----
-Navigation: [Home](../README.md)
+Navigation: [Home](../README.md) - [Final Stage 5](Stage_5.md)

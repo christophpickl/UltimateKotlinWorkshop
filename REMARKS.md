@@ -1,19 +1,15 @@
 
 # REMARKS for me
 
-- jeder braucht:
-	* internet access!
-	* java 8 sdk
-	* intellij (free community edition is enough)
-	??? gradle preinstalled ???
-- beide laptops mitnehmen!
+- beide (priv+biz) laptops mitnehmen!
 - im vorfeld link zum github repo ausschicken
-
+- hackathon bratislava
+    * WANN: freitag 23.2.
+    * uebernachten dort... oder heimfahren danach
 
 # TODO
 
-- organize slack room (in kotlin.lang)
-
+NONE :)
 
 ## Workshop Outline
 
@@ -22,7 +18,7 @@
     1. company/george
     1. kotlin
 * modalitaeten
-    - wenn "lost ist", dann mit hand L machen und aufzeigen
+    - wenn "lost ist" dann aufzeigen
 * stage 1: hello world
 	- setup project (create, import intellij)
 	- implement ping-pong service
@@ -32,4 +28,6 @@
 	- TODO
 * stage 3: persistence
 	- TODO
+
+
 
