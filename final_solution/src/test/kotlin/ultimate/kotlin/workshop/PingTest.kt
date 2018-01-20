@@ -20,7 +20,6 @@ class PingTest {
     @Test
     fun `When GET ping Then pong text returned`() {
         val request = RequestEntity.get(URI.create("/ping")).build()
-
         val response = rest.exchange(request, String::class.java)
 
         assertThat(response.statusCodeValue).isEqualTo(200)
@@ -32,7 +31,6 @@ class PingTest {
         val request = RequestEntity.get(URI.create("/ping"))
                 .header("accept", "application/json")
                 .build()
-
         val response = rest.exchange(request, String::class.java)
 
         assertThat(response.statusCodeValue).isEqualTo(200)
