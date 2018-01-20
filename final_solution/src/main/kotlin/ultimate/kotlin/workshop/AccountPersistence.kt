@@ -1,22 +1,30 @@
 package ultimate.kotlin.workshop
 
+import org.hibernate.annotations.GenericGenerator
+import org.hibernate.annotations.Parameter
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType.SEQUENCE
 import javax.persistence.Id
-import javax.persistence.SequenceGenerator
 import javax.persistence.Table
 
 @Entity
 @Table(name = "account")
 data class AccountJpa(
 
+        @GenericGenerator(
+                name = "accountSequenceGenerator",
+                strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
+                parameters = [
+                    Parameter(name = "sequence_name", value = "ACCOUNT_SEQUENCE"),
+                    Parameter(name = "initial_value", value = "1000"),
+                    Parameter(name = "increment_size", value = "1")
+                ]
+        )
         @Id
-        @GeneratedValue(strategy = SEQUENCE, generator = "account_sequence")
-        @SequenceGenerator(name = "account_sequence", sequenceName = "account_sequence")
+        @GeneratedValue(generator = "accountSequenceGenerator")
         @Column(updatable = false, nullable = false)
         val id: Long,
 
