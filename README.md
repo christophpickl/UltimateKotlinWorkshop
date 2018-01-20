@@ -30,3 +30,10 @@ In this case please feel free to go through them on your own.
 * [Stage 3](doc/Stage_3.md): Persistence
 * [Stage 4](doc/Stage_4.md): Security
 * [Stage 5](doc/Stage_5.md): Outlook
+
+# Prepared Solutions
+
+The [final_solution] folder contains all the project sources needed to finish this workshop.
+Whenever you are lost, feel free to cheat and have a look at that project.
+
+The [ultimate_solution] is based upon the final solution, but contains the implementation for the extra stage 5.
