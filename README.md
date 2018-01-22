@@ -2,11 +2,17 @@
 
 ## About
 
-The __Ultimate Kotlin Workshop__ guides you implementing a basic ReST webservice using the [Kotlin](https://kotlinlang.org/) 
-programming language and the [Spring](https://spring.io/) framework.
-It will provide a JSON API to manage accounts and transfer money between them.
+The __Ultimate Kotlin Workshop__ guides you implementing a basic ReSTful webservice using the [Kotlin](https://kotlinlang.org/) 
+programming language.
+Kotlin was announced from Google to be an official language support to develop Android apps but gains some momentum on the backend as well.
+There is nowadays even support to write client applications just like TypeScript which translates to JavaScript,
+enabling you to write shared code for different platforms.
+
+It will provide a JSON API to manage accounts and maybe transfer money between them.
 All of that will be persisted in an in-memory database using the Java Persistence API (JPA) and 
 an object-relational mapper called [Hibernate](http://hibernate.org/) under the hood.
+The whole application management will be done by the [Spring](https://spring.io/) framework,
+especially all the details are covered by Spring Boot, so we can focus on the "real stuff".
 If time permits we will also introduce a basic, custom security layer protecting our API.
 
 Its target audience are developers with basic experience in any object oriented programming language 
