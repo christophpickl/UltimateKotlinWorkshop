@@ -29,6 +29,10 @@ class AccountController(
     @GetMapping(produces = ["application/json"])
     fun getAccounts(user: User) = service.readAccounts()
 
+
+    @GetMapping(produces = ["application/json"])
+    fun getAccount(user: User) = service.readAccounts()
+
     @PostMapping(produces = ["application/json"], consumes = ["application/json"])
     fun postAccount(user: User, @RequestBody account: Account) = service.createAccount(account)
 
