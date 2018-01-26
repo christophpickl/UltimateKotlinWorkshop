@@ -9,7 +9,7 @@
 
 # TODO
 
-NONE :)
+* read https://www.callicoder.com/kotlin-spring-boot-mysql-jpa-hibernate-rest-api-tutorial/
 
 ## Workshop Outline
 
