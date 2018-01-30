@@ -5,7 +5,7 @@
 The __Ultimate Kotlin Workshop__ guides you implementing a basic ReSTful webservice using the [Kotlin](https://kotlinlang.org/) 
 programming language.
 Kotlin was announced from Google to be an official language support to develop Android apps but gains some momentum on the backend as well.
-There is nowadays even support to write client applications just like TypeScript which translates to JavaScript,
+There is nowadays even support to write client applications just like [TypeScript](https://www.typescriptlang.org/) which translates to JavaScript,
 enabling you to write shared code for different platforms.
 
 It will provide a JSON API to manage accounts and maybe transfer money between them.
@@ -31,11 +31,11 @@ You will need the following tools prepared on your computer to be able to follow
 The workshop is split into 4 stages, depending on the given timebox and the progress of the class, it is likely that not all stages will be covered. 
 In this case please feel free to go through them on your own.
 
-* [Stage 1](doc/Stage_1.md): Hello World
-* [Stage 2](doc/Stage_2.md): CRUD operations
+* [Stage 1](doc/Stage_1.md): Ping-Pong
+* [Stage 2](doc/Stage_2.md): Read Accounts
 * [Stage 3](doc/Stage_3.md): Persistence
 * [Stage 4](doc/Stage_4.md): Security
-* [Stage 5](doc/Stage_5.md): Outlook
+* [Stage 5](doc/Stage_5.md): Extras
 
 # Prepared Solutions
 
