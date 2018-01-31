@@ -121,21 +121,6 @@ class AccountServiceImpl(
 }
 ```
 
-
-## 3.5 - Configure Spring datasource
-
-Remove the old `application.properties` located in `src/main/resources` and replace it with a much cooler YAML based file called `application.yml` and add the following contents:
-
-```yaml
-spring:
-    datasource:
-      driver-class-name: org.h2.Driver
-      url: jdbc:h2:mem:ultimateDb
-```
-
-The above configures Spring's data source to use an in-memory database called [H2](http://www.h2database.com).
-Remember we've added a runtime dependency to it just recently?!
-
 Finally run all tests again which should give you enough confidence your work is done and you did a good job :)
 
 Now go ahead and proceed to the final stage you master hacker to whom all bases belong to! 

@@ -45,16 +45,11 @@ class AccountServiceImpl(
 @Entity
 @Table(name = "account")
 data class AccountJpa(
-
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_sequence")
         @SequenceGenerator(name = "account_sequence", sequenceName = "account_sequence")
-        @Column(updatable = false, nullable = false)
         val id: Long,
-
-        @Column(length = 255)
         val alias: String,
-
         val balance: Int
 )
 

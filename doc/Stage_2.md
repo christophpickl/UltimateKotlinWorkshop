@@ -34,10 +34,11 @@ class AccountTest {
     
     @Test
     fun `When GET accounts Then return empty list`() {
-        val request = RequestEntity.get(URI.create("/accounts")).build()
-        val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
+        val response = rest.exchange(
+            RequestEntity.get(URI.create("/accounts")).build(),
+            object : ParameterizedTypeReference<List<Account>>() {}
+        )
     
-        assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).isEqualTo(emptyList<Account>())
     }
 
@@ -79,10 +80,11 @@ Add a new test method to the `AccountTest` class, which needs to arrange test da
 fun `Given single account When GET accounts Then return that account`() {
     val account = givenAccount(Account(0, "alias", 42))
     
-    val request = RequestEntity.get(URI.create("/accounts")).build()
-    val response = rest.exchange(request, object : ParameterizedTypeReference<List<Account>>() {})
+    val response = rest.exchange(
+        RequestEntity.get(URI.create("/accounts")).build(),
+        object : ParameterizedTypeReference<List<Account>>() {}
+    )
 
-    assertThat(response.statusCodeValue).isEqualTo(200)
     assertThat(response.body).containsExactly(account)
 }
 ```
@@ -135,12 +137,12 @@ It is now possible to mock the service layer in the `AccountTest`, so go ahead a
 class AccountTest {
     
     @MockBean
-    private lateinit var mockService: AccountService
+    private lateinit var mockAccountService: AccountService
     
     // ...
     
     private fun givenAccount(account: Account) = account.apply {
-        whenever(mockService.readAccounts()).thenReturn(listOf(account))
+        whenever(mockAccountService.readAccounts()).thenReturn(listOf(account))
     }
 }
 ```

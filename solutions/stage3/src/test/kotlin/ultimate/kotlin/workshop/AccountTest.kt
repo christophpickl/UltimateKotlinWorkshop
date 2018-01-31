@@ -28,22 +28,17 @@ class AccountTest {
 
     @Test
     fun `When GET accounts Then return empty list`() {
-        val request = RequestEntity.get(URI.create("/accounts")).build()
+        val response = rest.exchange<List<Account>>(RequestEntity.get(URI.create("/accounts")).build())
 
-        val response = rest.exchange<List<Account>>(request)
-
-        assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).isEqualTo(emptyList<Account>())
     }
 
     @Test
     fun `Given single account When GET accounts Then return that account`() {
         val account = givenAccount(Account(0, "alias", 42))
-        val request = RequestEntity.get(URI.create("/accounts")).build()
 
-        val response = rest.exchange<List<Account>>(request)
+        val response = rest.exchange<List<Account>>(RequestEntity.get(URI.create("/accounts")).build())
 
-        assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).containsExactly(account)
     }
 

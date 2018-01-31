@@ -63,11 +63,8 @@ class PingTest {
 
     @Test
     fun `When GET ping Then pong text returned`() {
-        val request = RequestEntity.get(URI.create("/ping")).build()
+        val response = rest.exchange(RequestEntity.get(URI.create("/ping")).build(), String::class.java)
 
-        val response = rest.exchange(request, String::class.java)
-
-        assertThat(response.statusCodeValue).isEqualTo(200)
         assertThat(response.body).isEqualTo("pong")
     }
 
@@ -111,12 +108,12 @@ First of all adapt the `PingTest` class by adding one more test method like this
 ```kotlin
 @Test
 fun `When GET ping accepting JSON Then JSON payload is returned`() {
-    val request = RequestEntity.get(URI.create("/ping"))
+    val response = rest.exchange(
+        RequestEntity.get(URI.create("/ping"))
             .header("accept", "application/json") // this line is important
-            .build()
-    val response = rest.exchange(request, String::class.java)
+            .build(),
+            String::class.java)
 
-    assertThat(response.statusCodeValue).isEqualTo(200)
     assertThat(response.body).isEqualTo("""{"message":"pong"}""")
 }
 ```
@@ -140,9 +137,7 @@ data class Pong(
 
 @RestController
 @RequestMapping("/ping")
-class PingController(
-        private val mapper: ObjectMapper
-) {
+class PingController {
     
     private val pingResponse = "pong"
 

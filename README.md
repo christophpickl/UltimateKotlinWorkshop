@@ -23,10 +23,14 @@ Its target audience are developers with basic experience in any object oriented 
 You will need the following tools prepared on your computer to be able to follow the workshop:
 
 1. [Java 8 SDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) (or newer)
+    * Execute the following command on the command line in order to verify Java works: `$ java -version`
 1. [IntelliJ IDE](https://www.jetbrains.com/idea/download/) (the free community edition is sufficient)
+    * Please get sure you've installed the most recent Kotlin plugin as this usually leads to some problems afterwards. You can verify this by going to Preferences / Plugins / Browse Repositories / Kotlin and hit the Update button.
+    * Also please verify you can actually use the JDK in your IDE (just create a simple Java/Kotlin application and see whether there are configuration errors)
 1. [Gradle](https://gradle.org/install/) (tool to build the app)
 
-# Step-by-step Howto
+
+# Stages
 
 The workshop is split into 4 stages, depending on the given timebox and the progress of the class, it is likely that not all stages will be covered. 
 In this case please feel free to go through them on your own.
@@ -39,7 +43,7 @@ In this case please feel free to go through them on your own.
 
 # Prepared Solutions
 
-The [final_solution] folder contains all the project sources needed to finish this workshop.
-Whenever you are lost, feel free to cheat and have a look at that project.
+The [solutions] directory contains a solution for each step implementing all the tasks defined so far.
+Whenever you are lost, feel free to cheat and either just have a look at that project or just take over the complete sources from there.
 
-The [ultimate_solution] is based upon the final solution, but contains the implementation for the extra stage 5.
+The [solutions/ultimate_solution] implements all stages including the extra 5th stage (full CRUD operations and transaction support).

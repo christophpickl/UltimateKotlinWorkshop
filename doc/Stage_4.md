@@ -123,20 +123,17 @@ Add two new tests which either test for unknown or invalid username, both expect
 ```kotlin
 @Test
 fun `When GET accounts without username Then return 401 Unauthorized`() {
-    val request = RequestEntity.get(URI.create("/accounts")).build()
-
-    val response = rest.exchange<String>(request)
+    val response = rest.exchange<String>(RequestEntity.get(URI.create("/accounts")).build())
 
     assertThat(response.statusCodeValue).isEqualTo(401)
 }
 
 @Test
 fun `When GET accounts with wrong username Then return 401 Unauthorized`() {
-    val request = RequestEntity.get(URI.create("/accounts"))
-            .header("X-ultimate_username", "wrongUsername")
-            .build()
-
-    val response = rest.exchange<String>(request)
+    val response = rest.exchange<String>(
+        RequestEntity.get(URI.create("/accounts"))
+             .header("X-ultimate_username", "wrongUsername")
+             .build())
 
     assertThat(response.statusCodeValue).isEqualTo(401)
 }

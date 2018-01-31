@@ -56,7 +56,8 @@ class UserResolver(
 @EnableWebMvc
 class UltimateWebMvcConfig : WebMvcConfigurerAdapter() {
 
-    @Autowired private lateinit var userService: UserService
+    @Autowired
+    private lateinit var userService: UserService
 
     override fun addArgumentResolvers(argumentResolvers: MutableList<HandlerMethodArgumentResolver>) {
         argumentResolvers.add(UserResolver(userService))
